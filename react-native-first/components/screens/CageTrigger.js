@@ -8,19 +8,6 @@ const CageTrigger = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = async () =>{ 
     setIsEnabled(previousState => !previousState);
-    // setIsEnabled(async (state) => {
-      
-    //   if(state){
-    //     console.log("Cage Trigger On")
-    //     //await axios.post(`192.168.1.5:8000/`, '1');
-    //   }
-    //   else{
-    //     console.log("Cage Trigger Off")
-    //    // await axios.post(`192.168.1.5:8000/`, '0');
-    //   }
-      
-    //   return state;
-    // });
 
     var sampleData = '0';
       if(isEnabled){
