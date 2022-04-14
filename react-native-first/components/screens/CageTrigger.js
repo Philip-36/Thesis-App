@@ -5,25 +5,31 @@ import axios from "axios";
 
 const CageTrigger = () => {
 
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = async () =>{ 
-    setIsEnabled(previousState => !previousState);
-
-    var sampleData = '0';
-      if(isEnabled){
+  const [isEnabledA, setIsEnabledA] = useState(false);
+  const [isEnabledB, setIsEnabledB] = useState(false);
+  const toggleSwitchA = async () =>{ 
+    setIsEnabledA(previousState => !previousState);
+      if(isEnabledA){
         console.log("Cage Trigger Off")
-        await axios.post(`http://192.168.1.5:8000/`, '0');
+        await axios.post(`http://192.168.1.5:8000/`, 'A0');
         ;
       }
       else{
         console.log("Cage Trigger On");
-        await axios.post(`http://192.168.1.5:8000/`, '1');
+        await axios.post(`http://192.168.1.5:8000/`, 'A1');
+      } 
+  };
+  const toggleSwitchB = async () =>{ 
+    setIsEnabledB(previousState => !previousState);
+      if(isEnabledB){
+        console.log("Cage Trigger Off")
+        await axios.post(`http://192.168.1.5:8000/`, 'B0');
+        ;
       }
-      
-   // await axios.post(`http://192.168.1.5:8000/`, sampleData);
-      
-      
-    
+      else{
+        console.log("Cage Trigger On");
+        await axios.post(`http://192.168.1.5:8000/`, 'B1');
+      } 
   };
 
   return (
@@ -31,10 +37,17 @@ const CageTrigger = () => {
       <Header title="Cage Trigger" />
       <Switch
         trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        thumbColor={isEnabledA ? "#f5dd4b" : "#f4f3f4"}
         ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
+        onValueChange={toggleSwitchA}
+        value={isEnabledA}
+      />
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabledB ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitchB}
+        value={isEnabledB}
       />
     </View>
   );
