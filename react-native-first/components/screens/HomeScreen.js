@@ -13,6 +13,9 @@ const HomeScreen = ({ navigation }) => {
       <Button title="WaterQuality"
       onPress={() => navigation.navigate('WaterQuality')}
       />
+       <Button title="Cage Trigger"
+      onPress={() => navigation.navigate('CageTrigger')}
+      />
     </View>
   );
 };
