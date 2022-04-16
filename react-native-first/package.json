@@ -18,9 +18,14 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-dbb-rtmp": "^1.0.1",
+    "react-native-nodemediaclient": "^0.2.18",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
-    "react-native-web": "0.17.1"
+    "react-native-web": "0.17.1",
+    "react-native-webrtc": "^1.100.0",
+    "expo-av": "~10.2.0",
+    "react-native-webview": "11.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
