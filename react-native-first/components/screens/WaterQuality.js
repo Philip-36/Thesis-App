@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
 import Header from '../Header';
+import axios from 'axios'
 
 const WaterQuality = () => {
     const [users, setUsers] = useState([]);
+    const getSensorsRecords = () => {
+      return axios.get('http://192.168.1.5:5000')
+    };
 
     useEffect(() => {
-      const getUser = async () => {
-        const res = await fetch('https://jsonplaceholder.typicode.com/users');
-        const users = await res.json();
-        setUsers(users);
-      };
-      getUser();
+      getSensorsRecords()
+        .then(response => {
+          setUsers(response.data);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }, []);
-  
+      
     const renderItem = ({ item }) => (
       <View style={styles.item}>
-        <Text>{item.name}</Text>
-        <Text>{item.username}</Text>
-        <Text>{item.email}</Text>
+        <Text>Date adn Time: {item.datetime}</Text>
+        <Text>ph Level {item.ph}</Text>
+        <Text>Water temperature {item.temp}</Text>
+        <Text>Water Turbidity {item.turbidity}</Text>
       </View>
   );
   
