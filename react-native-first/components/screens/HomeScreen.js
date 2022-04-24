@@ -13,8 +13,13 @@ const HomeScreen = ({ navigation }) => {
       <Button title="WaterQuality"
       onPress={() => navigation.navigate('WaterQuality')}
       />
+      <Text> </Text>
        <Button title="Cage Trigger"
       onPress={() => navigation.navigate('CageTrigger')}
+      />
+      <Text> </Text>
+       <Button title="Notification Details"
+      onPress={() => navigation.navigate('NotificationDetails')}
       />
     </View>
   );
