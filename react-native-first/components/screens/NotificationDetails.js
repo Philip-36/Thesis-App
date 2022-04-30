@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
 import Header from '../Header';
-import axios from 'axios'
 import * as Notifications from 'expo-notifications';
 import * as BackgroundFetch from "expo-background-fetch"
 import * as TaskManager from "expo-task-manager"
@@ -16,33 +15,16 @@ Notifications.setNotificationHandler({
   
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
-// TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
-
-//   try {
-//     const now = Date.now();
-//     console.log(`Got background fetch call at date: ${new Date(now).toISOString()}`);
-//     const receivedNewData = await (await fetch('https://facebook.github.io/react-native/movies.json', {method: "GET"})).json();
-//     console.log('receivedNewData', receivedNewData);
-//     return receivedNewData ? BackgroundFetch.BackgroundFetchResult.NewData : BackgroundFetch.BackgroundFetchResult.NoData;
-
-//   } catch (error) {
-//       return BackgroundFetch.BackgroundFetchResult.Failed;
-//   }
-//   });
-
   TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
 
     try {
-      // Just a message to know if the background fetch is working
+
       const now = Date.now();
       console.log(`Got background fetch call at date: ${new Date(now).toISOString()}`);
 
-      // Fetching data here
       const receivedNewData = await (await fetch('https://facebook.github.io/react-native/movies.json', {method: "GET"})).json();
       console.log('receivedNewData', receivedNewData.movies[0].id);
-      // Condition for the alert
       if( receivedNewData.movies[0].id == 1 ){
-        // Calling the scheduledPushNotification function. Need to add more scheduledPushNotification function for the other alert
         await schedulePushNotification();
         console.log('inside of the if', receivedNewData.movies[0].id);
       }
@@ -59,9 +41,9 @@ const BACKGROUND_FETCH_TASK = 'background-fetch';
 
   async function registerBackgroundFetchAsync() {
     return BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
-        minimumInterval: 1, // task will fire 1 minute after app is backgrounded
-        stopOnTerminate: false, // android only,
-        startOnBoot: true, // android only
+        minimumInterval: 1, 
+        stopOnTerminate: false, 
+        startOnBoot: true, 
       });
   }
   async function unregisterBackgroundFetchAsync() {
@@ -72,7 +54,6 @@ const BACKGROUND_FETCH_TASK = 'background-fetch';
 
 
   const NotificationDetails = () => {
-    // const [expoPushToken, setExpoPushToken] = useState('');
     const [notification, setNotification] = useState(false);
     const notificationListener = useRef();
     const responseListener = useRef();
@@ -101,7 +82,6 @@ const BACKGROUND_FETCH_TASK = 'background-fetch';
     };
 
       useEffect(() => {  
-      // registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
   
       notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
         setNotification(notification);
@@ -157,37 +137,7 @@ const BACKGROUND_FETCH_TASK = 'background-fetch';
         trigger: { seconds: 2 }
       });
     }
-    
-    // async function registerForPushNotificationsAsync() {
-    //   let token;
-    //   if (Constants.isDevice) {
-    //     const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    //     let finalStatus = existingStatus;
-    //     if (existingStatus !== 'granted') {
-    //       const { status } = await Notifications.requestPermissionsAsync();
-    //       finalStatus = status;
-    //     }
-    //     if (finalStatus !== 'granted') {
-    //       alert('Failed to get push token for push notification!');
-    //       return;
-    //     }
-    //     token = (await Notifications.getExpoPushTokenAsync()).data;
-    //     console.log(token);
-    //   } else {
-    //     alert('Must use physical device for Push Notifications');
-    //   }
-    
-    //   if (Platform.OS === 'android') {
-    //     Notifications.setNotificationChannelAsync('default', {
-    //       name: 'default',
-    //       importance: Notifications.AndroidImportance.MAX,
-    //       vibrationPattern: [0, 250, 250, 250],
-    //       lightColor: '#FF231F7C',
-    //     });
-    //   }
-    
-    //   return token;
-    // }
+
     const styles = StyleSheet.create({
       container: {
         flex: 1,
