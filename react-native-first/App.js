@@ -17,9 +17,9 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home Page' }} />
         <Stack.Screen name="Camera" component={Camera} options={{ title: 'Camera' }} />
-        <Stack.Screen name="WaterQuality" component={WaterQuality} options={{ title: 'WaterQuality' }} />
-        <Stack.Screen name="CageTrigger" component={CageTrigger} options={{ title: 'CageTrigger' }} />
-        <Stack.Screen name="NotificationDetails" component={NotificationDetails} options={{ title: 'NotificationDetails' }} />
+        <Stack.Screen name="WaterQuality" component={WaterQuality} options={{ title: 'Water Quality' }} />
+        <Stack.Screen name="CageTrigger" component={CageTrigger} options={{ title: 'Cage Trigger' }} />
+        <Stack.Screen name="NotificationDetails" component={NotificationDetails} options={{ title: 'Notification Details' }} />
       </Stack.Navigator>
     </NavigationContainer>
     
