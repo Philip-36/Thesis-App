@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 0,
     width: '100%',
-    backgroundColor: 'yellow',
     justifyContent: 'center',
     flexDirection: 'row'
   },
