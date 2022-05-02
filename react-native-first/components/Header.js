@@ -13,9 +13,10 @@ const styles = StyleSheet.create({
   header: {
     height: 90,
     backgroundColor: 'lightblue',
+    marginBottom: 30
   },
   text: {
-    marginTop: 50,
+    marginTop: 35,
     color: 'white',
     fontSize: 20,
     textAlign: 'center',
