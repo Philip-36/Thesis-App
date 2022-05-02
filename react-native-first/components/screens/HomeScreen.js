@@ -1,13 +1,47 @@
-import React from 'react';
-import { View, Text, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Button, Alert  } from 'react-native';
 import Header from '../Header';
+import axios from "axios";
 
 const HomeScreen = ({ navigation }) => {
+
+  const cameraAlert = () =>
+    Alert.alert(
+      "Camera is busy",
+      "Bacteria & Fungus Detector is Running",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
+
+  const getDetectorStatus = async () => {
+      return await axios.get('http://192.168.1.5:5000/get-detector-status')
+    };
+
+
   return (
     <View>
       <Header title="Home" />
+      <Button title="Bacteria & FUngus Detector"
+      onPress={() => navigation.navigate('Detector')}
+      />
+      <Text> </Text>
       <Button title="Camera"
-      onPress={() => navigation.navigate('Camera')}
+      onPress={() => {
+        getDetectorStatus().then(response => {
+            console.log(response.data)
+          if(response.data === 0){
+            navigation.navigate('Camera')
+          }
+          else{
+            cameraAlert()
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+        
+      }}
       />
       <Text> </Text>
        <Button title="Cage Trigger"

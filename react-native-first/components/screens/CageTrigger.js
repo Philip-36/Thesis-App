@@ -5,8 +5,8 @@ import axios from "axios";
 
 const CageTrigger = () => {
 
-  const [isEnabledA, setIsEnabledA] = useState(false);
-  const [isEnabledB, setIsEnabledB] = useState(false);
+  const [isEnabledA, setIsEnabledA] = useState(true);
+  const [isEnabledB, setIsEnabledB] = useState(true);
   const toggleSwitchA = async () =>{ 
     setIsEnabledA(previousState => !previousState);
       if(isEnabledA){
@@ -73,7 +73,9 @@ const styles = StyleSheet.create({
     marginTop: 0,
     width: '100%',
     justifyContent: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderStyle: 'solid',
+    borderWidth: 2
   },
   label: {
     margin: 50,
