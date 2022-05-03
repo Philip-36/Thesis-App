@@ -7,6 +7,7 @@ import HomeScreen from './components/screens/HomeScreen';
 import WaterQuality from './components/screens/WaterQuality';
 import CageTrigger from './components/screens/CageTrigger';
 import NotificationDetails from './components/screens/NotificationDetails';
+import Detector from './components/screens/Detector';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home Page' }} />
+        <Stack.Screen name="Detector" component={Detector} options={{ title: 'Bacteria & Fungus Detector' }} />
         <Stack.Screen name="Camera" component={Camera} options={{ title: 'Camera' }} />
         <Stack.Screen name="WaterQuality" component={WaterQuality} options={{ title: 'Water Quality' }} />
         <Stack.Screen name="CageTrigger" component={CageTrigger} options={{ title: 'Cage Trigger' }} />
