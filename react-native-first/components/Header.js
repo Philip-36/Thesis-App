@@ -11,9 +11,9 @@ const Header = ({ title }) => {
 
 const styles = StyleSheet.create({
   header: {
-    height: 90,
+    height: 110,
     backgroundColor: 'lightblue',
-    marginBottom: 30
+    marginBottom: 35
   },
   text: {
     marginTop: 35,

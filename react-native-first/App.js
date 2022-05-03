@@ -8,6 +8,7 @@ import WaterQuality from './components/screens/WaterQuality';
 import CageTrigger from './components/screens/CageTrigger';
 import NotificationDetails from './components/screens/NotificationDetails';
 import Detector from './components/screens/Detector';
+import Tips from './components/screens/Tips';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Screen name="WaterQuality" component={WaterQuality} options={{ title: 'Water Quality' }} />
         <Stack.Screen name="CageTrigger" component={CageTrigger} options={{ title: 'Cage Trigger' }} />
         <Stack.Screen name="NotificationDetails" component={NotificationDetails} options={{ title: 'Notification Details' }} />
+        <Stack.Screen name="Tips" component={Tips} options={{ title: 'Tips' }} />
       </Stack.Navigator>
     </NavigationContainer>
     
