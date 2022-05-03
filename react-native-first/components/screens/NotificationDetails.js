@@ -32,15 +32,34 @@ async function getSensorsRecord() {
     console.log(err);
   }
 }
+
+const getInfectedStatus = async () => {
+  return await axios.get('http://192.168.1.5:5000/get-infected-status')
+};
+
+const setInfectedStatus = async () => {
+  return await axios.get('http://192.168.1.5:5000/set-infected-status')
+};
+
+
   TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
     
 
     try {
-
+      
+      getInfectedStatus().then(response => {
+        console.log("infected is: " + response.data)
+        if(response.data == 1){
+          infectedNotification()
+          setInfectedStatus()
+        }
+        
+      })
       const now = Date.now();
       console.log(`Got background fetch call at date: ${new Date(now).toISOString()}`);
       const receivedSensorData = await getSensorsRecord()
       console.log(receivedSensorData)
+
       
       if(receivedSensorData.ph < 5) {
         await lowPhNotification(receivedSensorData.ph);
@@ -114,6 +133,7 @@ async function getSensorsRecord() {
     };
   
     const toggleFetchTask = async () => {
+      
       console.log(isRegistered)
       if (isRegistered) {
         await unregisterBackgroundFetchAsync();
@@ -142,13 +162,24 @@ async function getSensorsRecord() {
             
       return (
         <View style={styles.container}>
+          <Text>Water Quality Monitoring and Background Notification Trigger</Text>
           <Button
-            title={isRegistered ? 'Water Quality Sensor: On' : 'Water Quality Sensor: Off'}
+            title={isRegistered ? 'Notification On' : 'Notification Off'}
             onPress={toggleFetchTask}
           />
           
       </View>
       );
+    }
+
+    async function infectedNotification() {
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: "Warning !!!",
+          body: 'Infected Tilapia Detected '
+        },
+        trigger: { seconds: 1 }
+      });
     }
 
     async function lowPhNotification(ph) {
