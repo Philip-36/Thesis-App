@@ -36,15 +36,24 @@ const WaterQuality = () => {
       });
   }, []);
 
-  
+  const setTurbidity = (turbidity) => {
+    let status = 'cloudy'
+    if(turbidity<10){
+      status = 'clear'
+    }
+    else if(turbidity>2500){
+      status = 'Dirty'
+    }
+    return status
+  };
     
   const renderItem = ({ item }) => (
     <View style={styles.item} key={item.datetime.substr(11)}>
       <Text>Date: {item.datetime.substr(0,10)}</Text>
       <Text>Time: {item.datetime.substr(11)}</Text>
-      <Text>pH Level {item.ph}</Text>
-      <Text>Water Temperature: {item.temp} °C</Text>
-      <Text>Water Turbidity: {item.turbidity} NTU</Text>
+      <Text>pH Level: {item.ph}</Text>
+      <Text>Water Temperature: {item.temp}°C</Text>
+      <Text>Water Turbidity: {setTurbidity(item.turbidity)}</Text>
     </View>
   );
   
