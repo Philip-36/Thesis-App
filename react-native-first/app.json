@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-native-first",
-    "slug": "react-native-first",
+    "name": "Fungus Detector",
+    "slug": "fungus-detector",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,14 +19,18 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": ["location", "fetch"]
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
       }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "io.expo.client"
     },
     "web": {
       "favicon": "./assets/favicon.png"
