@@ -4,21 +4,28 @@ import Header from '../Header';
 import axios from "axios";
 
 const CageTrigger = () => {
+  const [loading, setLoading] = useState(false);
 
   const [isEnabledA, setIsEnabledA] = useState(true);
   const [isEnabledB, setIsEnabledB] = useState(true);
-  const toggleSwitchA = async () =>{ 
+  //add async to this function
+  const toggleSwitchA =  () =>{ 
+    setLoading(true);
     setIsEnabledA(previousState => !previousState);
-      if(isEnabledA){
-        console.log("Cage Trigger A Off")
-        await axios.get(`http://192.168.1.5:5000/servo-motor/A0`);
-        ;
-      }
-      else{
-        console.log("Cage Trigger A On");
-        await axios.get(`http://192.168.1.5:5000/servo-motor/A1`);
-      } 
-      return "DOne"
+      // if(isEnabledA){
+      //   console.log("Cage Trigger A Off")
+      //   await axios.get(`http://192.168.1.5:5000/servo-motor/A0`);
+      //   ;
+      // }
+      // else{
+      //   console.log("Cage Trigger A On");
+      //   await axios.get(`http://192.168.1.5:5000/servo-motor/A1`);
+      // } 
+      setTimeout(() => {
+        setLoading(false);
+        console.log("test")
+      }, 5000);
+      return "Done"
   };
   const toggleSwitchB = async () =>{ 
     setIsEnabledB(previousState => !previousState);
@@ -46,6 +53,7 @@ const CageTrigger = () => {
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitchA}
             value={isEnabledA}
+            disabled = {loading}
           />
       </View>
       
