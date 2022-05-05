@@ -1,5 +1,5 @@
 {
-  "name": "react-native-first",
+  "name": "Fungus Detectort",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -30,7 +30,8 @@
     "expo-permissions": "~13.1.0",
     "expo-device": "~4.1.0",
     "expo-background-fetch": "~10.1.0",
-    "expo-task-manager": "~10.1.0"
+    "expo-task-manager": "~10.1.0",
+    "expo-updates": "~0.11.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
