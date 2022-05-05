@@ -14,6 +14,16 @@ const HomeScreen = ({ navigation }) => {
       ]
     );
 
+  const getConnection = () =>
+    
+    Alert.alert(
+      "Connected",
+      "You can use other functions now",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+  );
+
   const getDetectorStatus = async () => {
       return await axios.get('http://192.168.1.5:5000/get-detector-status')
     };
@@ -22,6 +32,10 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View>
       <Header title="Tilapia Fungus/Bacteria Detector & Water Quality Monitoring" />
+      <Button title="Check Connection"
+        onPress={ getConnection}
+      />
+      <Text> </Text>
       <Button title="Notification System"
       onPress={() => navigation.navigate('NotificationDetails')}
       />
