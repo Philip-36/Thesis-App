@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 35,
-    color: 'white',
+    color: 'black',
     fontSize: 20,
     textAlign: 'center',
   },

@@ -22,6 +22,10 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View>
       <Header title="Tilapia Fungus/Bacteria Detector & Water Quality Monitoring" />
+      <Button title="Notification System"
+      onPress={() => navigation.navigate('NotificationDetails')}
+      />
+      <Text> </Text>
       <Button title="Bacteria & FUngus Detector"
       onPress={() => navigation.navigate('Detector')}
       />
@@ -52,10 +56,7 @@ const HomeScreen = ({ navigation }) => {
       onPress={() => navigation.navigate('WaterQuality')}
       />
       <Text> </Text>
-       <Button title="Water Quality Sensors"
-      onPress={() => navigation.navigate('NotificationDetails')}
-      />
-      <Text> </Text>
+      
        <Button title="Tips"
       onPress={() => navigation.navigate('Tips')}
       />
