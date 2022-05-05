@@ -38,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
             navigation.navigate('Camera')
           }
           else{
-            cameraAlert()
+            cameraAlert
           }
         })
         .catch(function(error) {
