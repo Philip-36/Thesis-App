@@ -91,9 +91,8 @@ const WaterQuality = () => {
               color = "red"
           />
           <Button  
-              title= "Check current water quality data"
+              title= "Current Data"
               //onPress={ async () => await axios.get('http://192.168.1.5:5000/delete-records')}
-              color = "red"
               onPress={waterQualityData}
           />
         </View>
@@ -129,9 +128,9 @@ const WaterQuality = () => {
       flexDirection: 'row',
       flexWrap: 'wrap',
       alignItems: 'flex-start',
+      justifyContent: 'space-around',
       marginBottom: 30,
       marginTop: 30,
-      marginLeft: 30,
       
     },
     item: {
