@@ -13,27 +13,51 @@ const HomeScreen = ({ navigation }) => {
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ]
     );
-
-  const getConnection = () =>
-    
+    const errorConncetion = () =>
     Alert.alert(
-      "Connected",
-      "You can use other functions now",
+      "Camera is busy",
+      "Bacteria & Fungus Detector is Running",
       [
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ]
-  );
+    );
+
+
 
   const getDetectorStatus = async () => {
       return await axios.get('http://192.168.1.5:5000/get-detector-status')
     };
-
+  const isConnected = async () => {
+    return await axios.get('http://192.168.1.5:5000/is-connected')
+  };
 
   return (
     <View>
       <Header title="Tilapia Fungus/Bacteria Detector & Water Quality Monitoring" />
       <Button title="Check Connection"
-        onPress={ getConnection}
+        onPress={() =>{ 
+          let con = 1
+          isConnected().then(response => {
+          
+          console.log(response.data)
+        if(response.data == '1'){
+          Alert.alert(
+            "Connected",
+            "You can use other functions now",
+            [
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ])
+        }
+      })
+      .catch(function(error) {
+        con = 0;
+        console.log(error);
+        
+      })
+       
+      console.log(con);
+      
+    }}
       />
       <Text> </Text>
       <Button title="Notification System"
