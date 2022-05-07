@@ -13,17 +13,10 @@ const HomeScreen = ({ navigation }) => {
         { text: "OK", onPress: () => console.log("OK Pressed") }
       ]
     );
-    const errorConncetion = () =>
-    Alert.alert(
-      "Camera is busy",
-      "Bacteria & Fungus Detector is Running",
-      [
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ]
-    );
 
-
-
+    const startLiveStream = async () => {
+      return await axios.get('http://192.168.1.5:5000/start-live-stream')
+    };
   const getDetectorStatus = async () => {
       return await axios.get('http://192.168.1.5:5000/get-detector-status')
     };
@@ -64,19 +57,26 @@ const HomeScreen = ({ navigation }) => {
       onPress={() => navigation.navigate('NotificationDetails')}
       />
       <Text> </Text>
-      <Button title="Bacteria & FUngus Detector"
+      <Button title="Bacteria & Fungus Detector"
       onPress={() => navigation.navigate('Detector')}
       />
       <Text> </Text>
       <Button title="Camera"
-      onPress={() => {
-        getDetectorStatus().then(response => {
+      onPress={ () => {
+        getDetectorStatus().then(response  => {
             console.log(response.data)
-          if(response.data === 0){
-            navigation.navigate('Camera')
+          if(response.data === 1){
+            cameraAlert()
+            
           }
           else{
-            cameraAlert
+            startLiveStream().then( response  => {
+              navigation.navigate('Camera')
+            }
+              
+            )
+
+            
           }
         })
         .catch(function(error) {
