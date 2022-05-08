@@ -10,6 +10,11 @@ const Detector = ({ navigation }) => {
         return await axios.get('http://192.168.1.5:5000/get-detector-status')
       };
 
+      const stopDetector = async () => {
+       // return await axios.get('http://192.168.1.5:5000/get-detector-status')
+       console.log("stop")
+      };
+
 
     useEffect(() => {
         getDetectorStatus().then(response => {
@@ -36,6 +41,12 @@ const Detector = ({ navigation }) => {
             title={isDetectorRunning ? 'Detector is running' : 'Start Detector'}
             disabled = {isDetectorRunning}
             onPress={startDetector}
+          />
+          <Text> </Text>
+          <Button
+            title={'Stop Detector'}
+            disabled = {!isDetectorRunning}
+            onPress={stopDetector}
           />
     </View>
   );
