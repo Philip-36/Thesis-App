@@ -24,6 +24,10 @@ const HomeScreen = ({ navigation }) => {
     return await axios.get('http://192.168.1.5:5000/is-connected')
   };
 
+  const closeBothMotor = async () => {
+    return await axios.get('http://192.168.1.5:5000/servo-motor/AB')
+  };
+
   return (
     <View>
       <Header title="Tilapia Fungus/Bacteria Detector & Water Quality Monitoring" />
@@ -87,7 +91,11 @@ const HomeScreen = ({ navigation }) => {
       />
       <Text> </Text>
        <Button title="Cage Trigger"
-      onPress={() => navigation.navigate('CageTrigger')}
+      onPress={() => 
+        closeBothMotor().then(response  => {
+          navigation.navigate('CageTrigger')
+        })
+        }
       />
       <Text> </Text>
       <Button title="Water Quality Table"
