@@ -14,27 +14,69 @@ const HomeScreen = ({ navigation }) => {
       ]
     );
 
+    const startLiveStream = async () => {
+      return await axios.get('http://192.168.1.5:5000/start-live-stream')
+    };
   const getDetectorStatus = async () => {
       return await axios.get('http://192.168.1.5:5000/get-detector-status')
     };
-
+  const isConnected = async () => {
+    return await axios.get('http://192.168.1.5:5000/is-connected')
+  };
 
   return (
     <View>
       <Header title="Tilapia Fungus/Bacteria Detector & Water Quality Monitoring" />
-      <Button title="Bacteria & FUngus Detector"
+      <Button title="Check Connection"
+        onPress={() =>{ 
+          let con = 1
+          isConnected().then(response => {
+          
+          console.log(response.data)
+        if(response.data == '1'){
+          Alert.alert(
+            "Connected",
+            "You can use other functions now",
+            [
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ])
+        }
+      })
+      .catch(function(error) {
+        con = 0;
+        console.log(error);
+        
+      })
+       
+      console.log(con);
+      
+    }}
+      />
+      <Text> </Text>
+      <Button title="Notification System"
+      onPress={() => navigation.navigate('NotificationDetails')}
+      />
+      <Text> </Text>
+      <Button title="Bacteria & Fungus Detector"
       onPress={() => navigation.navigate('Detector')}
       />
       <Text> </Text>
       <Button title="Camera"
-      onPress={() => {
-        getDetectorStatus().then(response => {
+      onPress={ () => {
+        getDetectorStatus().then(response  => {
             console.log(response.data)
-          if(response.data === 0){
-            navigation.navigate('Camera')
+          if(response.data === 1){
+            cameraAlert()
+            
           }
           else{
-            cameraAlert()
+            startLiveStream().then( response  => {
+              navigation.navigate('Camera')
+            }
+              
+            )
+
+            
           }
         })
         .catch(function(error) {
@@ -52,10 +94,7 @@ const HomeScreen = ({ navigation }) => {
       onPress={() => navigation.navigate('WaterQuality')}
       />
       <Text> </Text>
-       <Button title="Water Quality Sensors"
-      onPress={() => navigation.navigate('NotificationDetails')}
-      />
-      <Text> </Text>
+      
        <Button title="Tips"
       onPress={() => navigation.navigate('Tips')}
       />

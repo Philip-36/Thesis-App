@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button, FlatList, RefreshControl, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Button, FlatList, RefreshControl, SafeAreaView, ScrollView, Alert } from 'react-native';
 import Header from '../Header';
 import axios from 'axios'
 
@@ -24,6 +24,21 @@ const WaterQuality = () => {
     setIsRefreshing(false);
     return axios.get('http://192.168.1.5:5000/get-all-sensors-data')
   };
+
+  // async function getSensorsRecord() {
+  //   try {
+  //     const response = await fetch('http://192.168.1.5:5000/get-recent-sensors-data');
+  
+  //     if (!response.ok) {
+  //       throw new Error(`Error! status: ${response.status}`);
+  //     }
+  
+  //     const result = await response.json();
+  //     return result;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
   
   useEffect(() => {
     getSensorsRecords()
@@ -56,6 +71,15 @@ const WaterQuality = () => {
       <Text>Water Turbidity: {setTurbidity(item.turbidity)}</Text>
     </View>
   );
+
+  const waterQualityData = () =>
+    Alert.alert(
+      "shems",
+      "Bacteria & Fungus Detector is Running",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
   
   return (
     <View style={styles.container}>
@@ -65,6 +89,11 @@ const WaterQuality = () => {
               title= "Delete All"
               onPress={ async () => await axios.get('http://192.168.1.5:5000/delete-records')}
               color = "red"
+          />
+          <Button  
+              title= "Current Data"
+              //onPress={ async () => await axios.get('http://192.168.1.5:5000/delete-records')}
+              onPress={waterQualityData}
           />
         </View>
         
@@ -99,9 +128,9 @@ const WaterQuality = () => {
       flexDirection: 'row',
       flexWrap: 'wrap',
       alignItems: 'flex-start',
+      justifyContent: 'space-around',
       marginBottom: 30,
       marginTop: 30,
-      marginLeft: 30,
       
     },
     item: {
