@@ -11,8 +11,8 @@ const Detector = ({ navigation }) => {
       };
 
       const stopDetector = async () => {
-       // return await axios.get('http://192.168.1.5:5000/get-detector-status')
-       console.log("stop")
+        await axios.get('http://192.168.1.5:5000/stop-detector')
+        navigation.navigate('Home')
       };
 
 
@@ -32,7 +32,7 @@ const Detector = ({ navigation }) => {
       }, []);
 
     const startDetector = () => {
-        axios.get('http://192.168.1.5:5000/start-detector')
+        axios.get('http://192.168.1.5:5000/start-fungus-detector')
         navigation.navigate('Home')
     }
   return (

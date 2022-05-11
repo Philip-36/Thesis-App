@@ -72,19 +72,52 @@ const WaterQuality = () => {
     </View>
   );
 
-  const waterQualityData = () =>
-    Alert.alert(
-      "shems",
-      "Bacteria & Fungus Detector is Running",
-      [
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ]
-    );
+  const waterQualityData = async () =>{
+    try {
+      const response = await fetch('http://192.168.1.5:5000/get-recent-sensors-data');
+
+      if (!response.ok) {
+        throw new Error(`Error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+       console.log(result)
+       Alert.alert(
+        "Water Quallity",
+        "pH Level: " + result.ph + "\n" +
+        "Water Temperature: " + result.temp + "°C\n" +
+        "Turbidity: " + result.turbidity,
+        [
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+      )
+    } catch (err) {
+      console.log(err);
+    }
+    };
   
   return (
     <View style={styles.container}>
+        <View style={styles.wQ}>
+        <Text>
+        </Text>
+        <Text>
+          Water Quality Standards:
+        </Text>
+        <Text>
+          pH Level: 5.0 - 10.0
+        </Text>
+        <Text>
+          Water Temperature: 27°C - 29°C
+        </Text>
+        <Text>
+          Water Turbidity: clear
+        </Text>
+        </View>
+        
       
         <View style={styles.containerButton}>
+        
           <Button  
               title= "Delete All"
               onPress={ async () => await axios.get('http://192.168.1.5:5000/delete-records')}
@@ -92,10 +125,11 @@ const WaterQuality = () => {
           />
           <Button  
               title= "Current Data"
-              //onPress={ async () => await axios.get('http://192.168.1.5:5000/delete-records')}
+              //onPress={ async () => await axios.get('http://192.168.1.5:5000/get-recent-sensors-data')}
               onPress={waterQualityData}
           />
         </View>
+        
         
         
      
@@ -143,6 +177,9 @@ const WaterQuality = () => {
       width: '40%',
       color: 'red',
       backgroundColor: '#88cb2f',
+    },
+    wQ: {
+      marginLeft: 20
     }
   });
 

@@ -73,7 +73,7 @@ const setInfectedStatus = async () => {
         console.log("pH: " + receivedSensorData.ph)
       }
       
-      if(receivedSensorData.temp < 18) {
+      if(receivedSensorData.temp < 27) {
         await lowTempNotification(receivedSensorData.temp);
         console.log("low temperature: " + receivedSensorData.temp)
       } 
